@@ -25,8 +25,9 @@ FROM emp, dept
 WHERE emp.deptno=dept.deptno 
 ORDER BY dept.loc
 
-7.SELECT COUNT(empno) AS ECOUNT ,COUNT(DISTINCT deptno) AS DCOUNT
-FROM emp
+7.SELECT COUNT(DISTINCT e.empno) AS ECOUNT ,COUNT(DISTINCT d.deptno) AS DCOUNT
+FROM emp e
+JOIN dept d
 
 8.SELECT e.ename
 FROM emp e,emp m
