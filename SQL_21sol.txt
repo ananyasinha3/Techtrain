@@ -44,9 +44,9 @@ WHERE ename LIKE 't%r'
 FROM emp
 WHERE ename LIKE '%a%'
 
-13.SELECT ename
+13.SELECT ename,hiredate
 FROM emp
-WHERE to_char(hiredate,'DD')<'19'
+WHERE CAST(hiredate as int)<19
 
 14.SELECT empno,ename
 FROM emp
