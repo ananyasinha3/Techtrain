@@ -1,0 +1,131 @@
+1.SELECT * 
+FROM emp
+WHERE job LIKE 'clerk'
+
+2.SELECT * 
+FROM emp
+WHERE job LIKE 'clerk' OR 'managers'
+
+3.SELECT date('now')
+
+4.SELECT ename,sal 
+FROM emp
+WHERE sal BETWEEN 500 AND 1000
+
+5.SELECT ename,sal 
+FROM emp
+WHERE hiredate LIKE '%DEC%'
+
+6.SELECT ename,sal 
+FROM emp
+WHERE sal NOT BETWEEN 1000 AND 2500
+
+7.SELECT ename,sal 
+FROM emp
+WHERE sal LIKE (800,950,3000,5000)
+
+8.SELECT ename
+FROM emp
+WHERE ename LIKE '_l%'
+
+9.SELECT ename
+FROM emp
+WHERE ename LIKE '%d'
+
+10.SELECT ename
+FROM emp
+WHERE ename LIKE '_____'
+
+11.SELECT ename
+FROM emp
+WHERE ename LIKE 't%r'
+
+12.SELECT ename
+FROM emp
+WHERE ename LIKE '%a%'
+
+13.SELECT ename,hiredate
+FROM emp
+WHERE CAST(hiredate as int)<19
+
+14.SELECT empno,ename
+FROM emp
+WHERE ename='JAMES'
+
+15.SELECT ename,sal
+FROM emp
+WHERE ename LIKE 'KING'
+
+16.SELECT * 
+FROM emp
+WHERE job LIKE 'PRESIDENT'
+
+17.SELECT * 
+FROM emp
+WHERE job LIKE 'MANAGER'
+
+18.SELECT * 
+FROM emp
+WHERE comm IS NOT NULL
+
+19.SELECT ename,hiredate
+FROM emp
+WHERE hiredate<('1991-1-1');
+
+20.SELECT ename,sal
+FROM emp
+WHERE ename IN ('KING','BLAKE','FORD','SMITH')
+
+21.SELECT ename,sal
+FROM emp
+WHERE sal<3500
+
+22.SELECT * 
+FROM emp
+WHERE job LIKE 'clerk'
+
+23.SELECT ename,sal*12 AS ANNSAL
+FROM emp
+
+24.SELECT ename,((sal*0.2)+sal)*12 AS ANNSAL
+FROM emp
+WHERE ename LIKE 'FORD'
+
+25.SELECT deptno,SUM(SAL)
+FROM emp
+GROUP BY deptno
+
+26.SELECT ename,MIN(SAL)
+FROM emp
+WHERE deptno=10
+
+27.SELECT job,ROUND(AVG(SAL),2)
+FROM emp
+WHERE job LIKE 'MANAGER'
+
+28.SELECT job,SUM(SAL)
+FROM emp
+WHERE job LIKE 'salesman'
+
+29.SELECT deptno,MIN(AVR) 
+FROM (SELECT deptno, ROUND(AVG(SAL),2) AS AVR
+FROM emp
+GROUP BY deptno)
+
+30.SELECT job,COUNT(empno)
+FROM emp
+GROUP BY job
+
+31.SELECT job,MAX(SAL)
+FROM emp
+WHERE job LIKE 'ANALYST'
+
+32.SELECT ename,MAX(COMM)
+FROM emp
+
+34.SELECT COUNT(deptno)
+FROM DEPT
+
+35.SELECT ename
+FROM emp
+WHERE ename LIKE '__l%'
