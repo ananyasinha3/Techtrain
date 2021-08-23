@@ -1,0 +1,184 @@
+1. create a SP which accepts deptno and display
+all emp details who belong to that deptno
+-create procedure GetAllEmpDetailsDept(@depno int)
+as
+begin
+select empno,ename,sal,job,deptno,comm,mgr from emp where deptno=@depno
+end
+
+exec GetAllEmpDetailsDept 10
+
+
+
+2. create a SP which accepts empno and display
+his/her annual sal
+-create procedure GetAnnualSal(@empno int)
+as
+begin
+select sal*12 from emp where empno=@empno
+end
+
+exec GetAnnualSal 7369
+
+
+
+3. create a SP which accepts deptno and display
+how many employees working in that deptno
+-create procedure GetNumbOfEmp(@deptno int)
+as
+begin
+select COUNT(empno) from emp where deptno=@deptno
+end
+
+exec GetNumbOfEmp 10
+
+
+4. create a SP which accepts deptno and display
+what is the min and max sal taken in that deptno
+-create procedure GetMinMaxSal(@deptno int)
+as
+begin
+select MIN(sal) as MINSAL ,MAX(sal) as MAXSAL from emp where deptno=@deptno
+end
+
+exec GetMinMaxSal 10
+
+
+
+5. create function which accepts empno and return
+his/her annual sal
+-create function GetAnnualSalary(@empno int)
+returns int
+begin
+declare @sal int
+select @sal=sal from emp where empno=@empno
+return @sal*12
+end;
+
+select dbo.GetAnnualSalary(7369)
+
+
+
+6. create a function which accepts deptno
+and returns no of employee available
+in that deptno
+- create function GetEmpCount(@deptno int)
+returns int
+begin
+declare @count int
+select @count=COUNT(empno) from emp where deptno=@deptno
+return @count
+end;
+
+select dbo.GetEmpCount(10)
+
+
+
+7. Create a function which accepts mgrid and display
+all emps who report to that person
+-create function GetEmpByMgr(@mgrid int)
+returns table
+as
+return
+(
+	select empno,ename from emp where mgr=@mgrid
+);
+
+select * from GetEmpByMgr(7839)
+
+
+
+8. Create a function which accepts num as a salary
+and display all emps who get sal more than given sal
+- alter function GetEmpBySal(@sal int)
+returns table
+as
+return
+(
+	select empno,ename,sal from emp where sal>@sal
+);
+
+select * from GetEmpBySal(1000)
+
+
+9.DATE and TIME FUNCTIONS
+
+declare @time time(2)
+set @time='12:15:30'
+print @time
+
+declare @date date
+set @date='1999-02-01'
+print @date
+
+declare @datetime datetime
+set @datetime='1999-02-01'
+print @datetime
+
+IF ISDATE('2009-05-12 10:19:41.177') =1 
+    PRINT 'VALID'  
+ELSE  
+    PRINT 'INVALID';
+
+SELECT DATEADD(month, 1, '20060830');
+
+SELECT DATEDIFF(month,'2005-12-31 23:59:59.9999999', '2006-03-01 00:00:00.0000000');
+
+declare @date date
+set @date='1999-02-01'
+SELECT DATENAME (year,@date) 
+
+SELECT DATEPART(year,'1899-01-01')
+
+SELECT DAY('2021-08-23')
+
+SELECT MONTH('2021-08-23')
+
+SELECT YEAR('2021-08-23')
+
+SELECT GETDATE()
+
+
+10.NUMERIC FUNCTIONS
+
+SELECT CEILING(6.789)
+
+SELECT FLOOR(2.345)
+
+SELECT RAND()
+
+SELECT ROUND(4.5967,2)
+
+SELECT SQRT(16)
+
+11.STRING FUNCTIONS
+
+SELECT UPPER('apple')
+
+SELECT LOWER('AppLE')
+
+SELECT TRIM('   # Apple #  ')
+
+SELECT RTRIM('   # Apple #  ')
+
+SELECT LTRIM('   # Apple #  ')
+
+SELECT ASCII('a')
+
+SELECT CHAR(97)
+
+SELECT CONCAT ('Hello','World')
+
+SELECT LEFT('abcdefgh',5)
+
+SELECT RIGHT('abcdefgh',5)
+
+SELECT LEN('abcdefgh')
+
+SELECT REPLACE('abcdefgh','cde','xyz')
+
+SELECT REPLICATE('abcdefgh',2)
+
+SELECT REVERSE('abcdefgh')
+
+SELECT SUBSTRING('abcdefgh',2,6)
