@@ -1,0 +1,129 @@
+1. List all emps who are in 10th dept
+
+private static void GetEmpDetailsbyDept()
+        {
+            var ctx = new Training_TSQLContext();
+            var emp = ctx.Emps.Where(e => e.Deptno == 10);
+            foreach (var e in emp)
+            {
+                Console.WriteLine(e.Ename + " " + e.Deptno);
+            }
+            
+        }
+
+2. What is the max sal in the emp table
+
+ private static void GetMaxSal()
+        {
+            var ctx = new Training_TSQLContext();
+
+            var maxSal = ctx.Emps.Max(e => e.Sal);
+            Console.WriteLine(maxSal);
+        }
+
+
+3.What is the sum of salary in 10th dept
+
+private static void GetSumSal()
+        {
+            var ctx = new Training_TSQLContext();
+            var sum = ctx.Emps.Where(e => e.Deptno == 10).Sum(e=>e.Sal);
+       
+            Console.WriteLine(sum);
+        }
+
+4.List all emps whose name starts with J
+
+ private static void GetNamebyLetter()
+        {
+            var ctx = new Training_TSQLContext();
+            var name = ctx.Emps.Where(e => e.Ename.StartsWith("J"));
+
+            foreach(var e in name)
+            {
+                Console.WriteLine(e.Ename);
+            }
+        }
+
+5.Delete
+
+private static void DeleteEmpDetails()
+        {
+            var ctx = new Training_TSQLContext();
+            var emp = ctx.Emps.Where(e => e.Empno == 5050).SingleOrDefault();
+            
+            try
+            {
+                ctx.Emps.Remove(emp);
+                ctx.SaveChanges();
+                Console.WriteLine("Employee info deleted successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.ToString());
+            }
+        }
+
+
+6.Update
+
+private static void UpdateEmpDetails()
+        {
+            var ctx = new Training_TSQLContext();
+            var emp = ctx.Emps.Where(e => e.Empno == 5050).SingleOrDefault();
+            emp.Sal = 20000;
+            emp.Ename = "Max";
+
+            try
+            {
+                ctx.Emps.Update(emp);
+                ctx.SaveChanges();    
+                Console.WriteLine("Employee info updated successfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.ToString());
+            }
+
+        
+
+
+7.How to call stored procedure
+
+ private static void GetAllEmpDetails_SP()
+        {
+            var ctx = new Training_TSQLContext();
+            try
+            {
+                var emps = ctx.Set<Emp>().
+                             FromSqlRaw("GetAllEmpDetails").ToList();
+
+                foreach (var emp in emps)
+                {
+                    Console.WriteLine(emp.Ename+" "+emp.Sal);
+                }
+
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.ToString());
+            }
+        }
+
+8. Delete Stored Procedure
+private static void DeleteEmpDetails_SP()
+        {
+            var ctx = new Training_TSQLContext();
+            try
+            {
+                ctx.Database.ExecuteSqlRaw("DeleteEmpbyEmpno @p0", 2979);
+
+                Console.WriteLine("Deleted");
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.InnerException.ToString());
+            }
+        }
+
